@@ -15,6 +15,3 @@ Maintainer: Can Wang <wcancan@mail.ustc.edu.cn>
 }
 
 \keyword{ package }
-\seealso{
-  Optional links to other man pages
-}
