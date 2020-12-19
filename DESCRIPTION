@@ -1,0 +1,16 @@
+Package: StatComp20036
+Type: Package
+Title: Functions of my project and homework for "Statistical Computing" course
+Version: 1.0
+Date: 2020-12-08
+Author: Can Wang
+Maintainer: Can Wang <wcancan@mail.ustc.edu.cn>
+Description: 20036's final project for 'Statistical Computing' course.
+License: GPL (>= 2)
+Imports: Rcpp (>= 1.0.5), microbenchmark, knitr, rmarkdown, MASS, RANN, Ball, boot, bootstrap, devtools, energy, parallel,DAAG,survival,xtable
+LinkingTo: Rcpp
+RoxygenNote: 7.1.1
+Encoding: UTF-8
+VignetteBuilder: knitr
+URL: https://github.com/taurielcc/StatComp20036
+BugReports: https://github.com/taurielcc/StatComp20036/issues
