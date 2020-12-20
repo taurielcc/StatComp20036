@@ -2,3 +2,8 @@ doc
 !inst/doc
 Meta
 .Rproj.user
+*.o
+*.RData
+*.Rhistory
+*.so
+*.dll

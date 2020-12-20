@@ -1,3 +1,7 @@
+#' @importFrom Rcpp evalCpp
+#' @useDynLib StatComp20036
+NULL
+
 #' @title Non-parametric Bootstrapping
 #' @description Estimate the standard error and the bias of an estimator using R
 #' @param data he data as a vector, matrix or data frame
