@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Can Wang" />
+
+
+<title>my_function</title>
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">my_function</h1>
+<h4 class="author">Can Wang</h4>
+
+
+
+<div id="overview" class="section level2">
+<h2>Overview</h2>
+<p><strong>StatComp20036</strong> is a simple R package developed to compute the bias and the standard error of an estimator with resampling methods.Three functions are considered, namely, <em>boot</em> (using bootstrap method) and <em>jack</em> and <em>jackafterboot</em>. And a <em>KNN function</em> using Rcpp is also given in this package. For each row of the test set, the k nearest (in Euclidean distance) training set vectors are found, and the classification is decided by majority vote. For each function, examples are given.</p>
+</div>
+<div id="comparing-boot-jack-and-jackafterboot" class="section level2">
+<h2>Comparing <em>boot</em>, <em>jack</em> and <em>jackafterboot</em></h2>
+<p>The source R code for <em>boot</em> is as follows:</p>
+<p><strong><em>Bootstrap</em></strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">boot &lt;-<span class="st"> </span><span class="cf">function</span>(data,<span class="dt">func=</span><span class="ot">NULL</span>, B){</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">  theta.hat &lt;-<span class="st"> </span><span class="kw">func</span>(data)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="co">#set up the bootstrap</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">  n &lt;-<span class="st"> </span><span class="kw">length</span>(data)      <span class="co">#sample size</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">  theta.b &lt;-<span class="st"> </span><span class="kw">numeric</span>(B)     <span class="co">#storage for replicates</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">  <span class="cf">for</span> (b <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>B) {</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">    <span class="co">#randomly select the indices</span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">    i &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span>n, <span class="dt">size =</span> n, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">    dat &lt;-<span class="st"> </span>data[i]       <span class="co">#i is a vector of indices</span></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">    theta.b[b] &lt;-<span class="st"> </span><span class="kw">func</span>(dat)</a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">  }</a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">  <span class="co">#bootstrap estimate of standard error of R</span></a>
+<a class="sourceLine" id="cb1-13" data-line-number="13">  bias.theta &lt;-<span class="st"> </span><span class="kw">mean</span>(theta.b <span class="op">-</span><span class="st"> </span>theta.hat)</a>
+<a class="sourceLine" id="cb1-14" data-line-number="14">  se &lt;-<span class="st"> </span><span class="kw">sd</span>(theta.b)</a>
+<a class="sourceLine" id="cb1-15" data-line-number="15">  <span class="kw">return</span>(<span class="kw">list</span>(<span class="dt">bias.b =</span> bias.theta,<span class="dt">se.b =</span> se))</a>
+<a class="sourceLine" id="cb1-16" data-line-number="16">}</a></code></pre></div>
+<p><strong><em>Jackknife</em></strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">jack &lt;-<span class="st"> </span><span class="cf">function</span>(data,<span class="dt">func=</span><span class="ot">NULL</span>){</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">  theta.hat &lt;-<span class="st"> </span><span class="kw">func</span>(data)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">  <span class="co">#set up the bootstrap</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">  <span class="co">#B is the number of replicates</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">  n &lt;-<span class="st"> </span><span class="kw">length</span>(data)      <span class="co">#sample size</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">  M &lt;-<span class="st"> </span><span class="kw">numeric</span>(n)</a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n) { <span class="co">#leave one out</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">    y &lt;-<span class="st"> </span>data[<span class="op">-</span>i]</a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">    M[i] &lt;-<span class="st"> </span><span class="kw">func</span>(y)</a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">  }</a>
+<a class="sourceLine" id="cb2-11" data-line-number="11">  Mbar &lt;-<span class="st"> </span><span class="kw">mean</span>(M)</a>
+<a class="sourceLine" id="cb2-12" data-line-number="12">  se.jack &lt;-<span class="st"> </span><span class="kw">sqrt</span>(((n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)<span class="op">/</span>n) <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>((M <span class="op">-</span><span class="st"> </span>Mbar)<span class="op">^</span><span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb2-13" data-line-number="13">  <span class="kw">return</span>(se.jack)</a>
+<a class="sourceLine" id="cb2-14" data-line-number="14">}</a></code></pre></div>
+<p><strong><em>Jackafterboot</em></strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">jackafterboot &lt;-<span class="st"> </span><span class="cf">function</span>(data,<span class="dt">func=</span><span class="ot">NULL</span>,B){</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">  n &lt;-<span class="st"> </span><span class="kw">length</span>(data)</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">  theta.b &lt;-<span class="st"> </span><span class="kw">numeric</span>(B)</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">  <span class="co"># set up storage for the sampled indices</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">  indices &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">nrow =</span> B, <span class="dt">ncol =</span> n)</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">  <span class="co"># jackknife-after-bootstrap step 1: run the bootstrap</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">  <span class="cf">for</span> (b <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>B) {</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">    i &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span>n, <span class="dt">size =</span> n, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">    y &lt;-<span class="st"> </span>data[i]</a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">    theta.b[b] &lt;-<span class="st"> </span><span class="kw">func</span>(y)</a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">    <span class="co">#save the indices for the jackknife</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12">    indices[b, ] &lt;-<span class="st"> </span>i</a>
+<a class="sourceLine" id="cb3-13" data-line-number="13">  }</a>
+<a class="sourceLine" id="cb3-14" data-line-number="14">  <span class="co">#jackknife-after-bootstrap to est. se(se)</span></a>
+<a class="sourceLine" id="cb3-15" data-line-number="15">  se.jack &lt;-<span class="st"> </span><span class="kw">numeric</span>(n)</a>
+<a class="sourceLine" id="cb3-16" data-line-number="16">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n) {</a>
+<a class="sourceLine" id="cb3-17" data-line-number="17">    <span class="co">#in i-th replicate omit all samples with x[i]</span></a>
+<a class="sourceLine" id="cb3-18" data-line-number="18">    keep &lt;-<span class="st"> </span>(<span class="dv">1</span><span class="op">:</span>B)[<span class="kw">apply</span>(indices, <span class="dt">MARGIN =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb3-19" data-line-number="19">                        <span class="dt">FUN =</span> <span class="cf">function</span>(k) {<span class="op">!</span><span class="kw">any</span>(k <span class="op">==</span><span class="st"> </span>i)})]</a>
+<a class="sourceLine" id="cb3-20" data-line-number="20">    se.jack[i] &lt;-<span class="st"> </span><span class="kw">sd</span>(theta.b[keep])</a>
+<a class="sourceLine" id="cb3-21" data-line-number="21">  }</a>
+<a class="sourceLine" id="cb3-22" data-line-number="22">  se.boot &lt;-<span class="st"> </span><span class="kw">sd</span>(theta.b)</a>
+<a class="sourceLine" id="cb3-23" data-line-number="23">  se.jackafterboot &lt;-<span class="st"> </span><span class="kw">sqrt</span>((n<span class="dv">-1</span>) <span class="op">*</span><span class="st"> </span><span class="kw">mean</span>((se.jack <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(se.jack))<span class="op">^</span><span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb3-24" data-line-number="24">  <span class="kw">return</span>(<span class="kw">list</span>(<span class="dt">se.boot =</span> se.boot, <span class="dt">se.jackafterboot=</span>se.jackafterboot))</a>
+<a class="sourceLine" id="cb3-25" data-line-number="25">}</a></code></pre></div>
+<p><strong>In order to empirically compare <em>boot</em> , <em>jack</em> and <em>jackafterboot</em>, one generates 1,000 repicates of beta(2,3) * 20. </strong></p>
+<p><strong><em>The R code for KNN using Rcpp is as follows.</em></strong></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">data &lt;-<span class="st"> </span><span class="dv">20</span> <span class="op">*</span><span class="st"> </span><span class="kw">rbeta</span>(<span class="dv">1000</span>,<span class="dv">2</span>,<span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">(boot &lt;-<span class="st"> </span><span class="kw">boot</span>(<span class="dt">data =</span> data, <span class="dt">B =</span> <span class="dv">200</span>, <span class="dt">func =</span> median)<span class="op">$</span>se.b)</a></code></pre></div>
+<pre><code>## [1] 0.1880831</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">(jack &lt;-<span class="st"> </span><span class="kw">jack</span>(<span class="dt">data =</span> data, <span class="dt">func =</span> median))</a></code></pre></div>
+<pre><code>## [1] 0.2790226</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">(jackafterboot&lt;-<span class="st"> </span><span class="kw">jackafterboot</span>(data, <span class="dt">B =</span> <span class="dv">200</span>, <span class="dt">func =</span> median))</a></code></pre></div>
+<pre><code>## $se.boot
+## [1] 0.1977761
+## 
+## $se.jackafterboot
+## [1] 0.3600402</code></pre>
+<p><strong>As is shown in the result, standard error of jackafterboot is much lower than the result generated by bootstrap method.</strong></p>
+</div>
+<div id="a-knn-function-using-rcpp" class="section level2">
+<h2>A KNN function using Rcpp</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">NumericMatrix <span class="kw">L2SqrDistance</span>(NumericMatrix X, NumericMatrix Z)</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">    auto n =<span class="st"> </span><span class="kw">X.nrow</span>();</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">    auto m =<span class="st"> </span><span class="kw">Z.nrow</span>();</a>
+<a class="sourceLine" id="cb10-5" data-line-number="5">    auto d =<span class="st"> </span><span class="kw">X.ncol</span>();</a>
+<a class="sourceLine" id="cb10-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb10-7" data-line-number="7">    NumericMatrix <span class="kw">result</span>(m, n);</a>
+<a class="sourceLine" id="cb10-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb10-9" data-line-number="9">    <span class="cf">for</span> (size_t <span class="dt">i =</span> <span class="dv">0</span>; i <span class="op">&lt;</span><span class="st"> </span>m; <span class="op">++</span>i)</a>
+<a class="sourceLine" id="cb10-10" data-line-number="10">    {</a>
+<a class="sourceLine" id="cb10-11" data-line-number="11">        <span class="cf">for</span> (size_t <span class="dt">j =</span> <span class="dv">0</span>; j <span class="op">&lt;</span><span class="st"> </span>n; <span class="op">++</span>j)</a>
+<a class="sourceLine" id="cb10-12" data-line-number="12">        {</a>
+<a class="sourceLine" id="cb10-13" data-line-number="13">            double s =<span class="st"> </span><span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb10-14" data-line-number="14">            <span class="cf">for</span> (size_t <span class="dt">k =</span> <span class="dv">0</span>; k <span class="op">&lt;</span><span class="st"> </span>d; <span class="op">++</span>k)</a>
+<a class="sourceLine" id="cb10-15" data-line-number="15">            {</a>
+<a class="sourceLine" id="cb10-16" data-line-number="16">                s <span class="op">+</span><span class="er">=</span><span class="st"> </span>(<span class="kw">X</span>(j, k) <span class="op">-</span><span class="st"> </span><span class="kw">Z</span>(i, k)) <span class="op">*</span><span class="st"> </span>(<span class="kw">X</span>(j, k) <span class="op">-</span><span class="st"> </span><span class="kw">Z</span>(i, k));</a>
+<a class="sourceLine" id="cb10-17" data-line-number="17">            }</a>
+<a class="sourceLine" id="cb10-18" data-line-number="18">            <span class="kw">result</span>(i, j) =<span class="st"> </span>s;</a>
+<a class="sourceLine" id="cb10-19" data-line-number="19">        }</a>
+<a class="sourceLine" id="cb10-20" data-line-number="20">    }</a>
+<a class="sourceLine" id="cb10-21" data-line-number="21"></a>
+<a class="sourceLine" id="cb10-22" data-line-number="22">    return result;</a>
+<a class="sourceLine" id="cb10-23" data-line-number="23">}</a>
+<a class="sourceLine" id="cb10-24" data-line-number="24"></a>
+<a class="sourceLine" id="cb10-25" data-line-number="25">struct indexed_data_t</a>
+<a class="sourceLine" id="cb10-26" data-line-number="26">{</a>
+<a class="sourceLine" id="cb10-27" data-line-number="27">    T data;</a>
+<a class="sourceLine" id="cb10-28" data-line-number="28">    size_t index;</a>
+<a class="sourceLine" id="cb10-29" data-line-number="29"></a>
+<a class="sourceLine" id="cb10-30" data-line-number="30">    bool operator<span class="op">&lt;</span>(const indexed_data_t <span class="op">&amp;</span>other)</a>
+<a class="sourceLine" id="cb10-31" data-line-number="31">    {</a>
+<a class="sourceLine" id="cb10-32" data-line-number="32">        return this-&gt;data <span class="op">&lt;</span><span class="st"> </span>other.data;</a>
+<a class="sourceLine" id="cb10-33" data-line-number="33">    }</a>
+<a class="sourceLine" id="cb10-34" data-line-number="34">};</a>
+<a class="sourceLine" id="cb10-35" data-line-number="35"></a>
+<a class="sourceLine" id="cb10-36" data-line-number="36">void <span class="kw">heapify</span>(T <span class="op">*</span>arr, int idx, size_t n)</a>
+<a class="sourceLine" id="cb10-37" data-line-number="37">{</a>
+<a class="sourceLine" id="cb10-38" data-line-number="38">    <span class="cf">while</span> (idx <span class="op">&lt;</span><span class="st"> </span>n)</a>
+<a class="sourceLine" id="cb10-39" data-line-number="39">    {</a>
+<a class="sourceLine" id="cb10-40" data-line-number="40">        auto left_idx =<span class="st"> </span>idx <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>;</a>
+<a class="sourceLine" id="cb10-41" data-line-number="41">        auto right_idx =<span class="st"> </span>idx <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span>;</a>
+<a class="sourceLine" id="cb10-42" data-line-number="42">        auto target_idx =<span class="st"> </span>idx;</a>
+<a class="sourceLine" id="cb10-43" data-line-number="43"></a>
+<a class="sourceLine" id="cb10-44" data-line-number="44">        <span class="cf">if</span> (left_idx <span class="op">&gt;=</span><span class="st"> </span>n)</a>
+<a class="sourceLine" id="cb10-45" data-line-number="45">            <span class="cf">break</span>;</a>
+<a class="sourceLine" id="cb10-46" data-line-number="46">        <span class="cf">if</span> (arr[left_idx] <span class="op">&lt;</span><span class="st"> </span>arr[idx] <span class="op">&amp;&amp;</span><span class="st"> </span>(right_idx <span class="op">&gt;=</span><span class="st"> </span>n <span class="op">||</span><span class="st"> </span>arr[left_idx] <span class="op">&lt;</span><span class="st"> </span>arr[right_idx]))</a>
+<a class="sourceLine" id="cb10-47" data-line-number="47">        {</a>
+<a class="sourceLine" id="cb10-48" data-line-number="48">            target_idx =<span class="st"> </span>left_idx;</a>
+<a class="sourceLine" id="cb10-49" data-line-number="49">        }</a>
+<a class="sourceLine" id="cb10-50" data-line-number="50">        <span class="cf">else</span> <span class="cf">if</span> (right_idx <span class="op">&lt;</span><span class="st"> </span>n <span class="op">&amp;&amp;</span><span class="st"> </span>arr[right_idx] <span class="op">&lt;</span><span class="st"> </span>arr[idx])</a>
+<a class="sourceLine" id="cb10-51" data-line-number="51">        {</a>
+<a class="sourceLine" id="cb10-52" data-line-number="52">            target_idx =<span class="st"> </span>right_idx;</a>
+<a class="sourceLine" id="cb10-53" data-line-number="53">        }</a>
+<a class="sourceLine" id="cb10-54" data-line-number="54">        <span class="cf">if</span> (target_idx <span class="op">!=</span><span class="st"> </span>idx)</a>
+<a class="sourceLine" id="cb10-55" data-line-number="55">        {</a>
+<a class="sourceLine" id="cb10-56" data-line-number="56">            std<span class="op">::</span><span class="kw">swap</span>(arr[idx], arr[target_idx]);</a>
+<a class="sourceLine" id="cb10-57" data-line-number="57">            idx =<span class="st"> </span>target_idx;</a>
+<a class="sourceLine" id="cb10-58" data-line-number="58">        }</a>
+<a class="sourceLine" id="cb10-59" data-line-number="59">        <span class="cf">else</span></a>
+<a class="sourceLine" id="cb10-60" data-line-number="60">        {</a>
+<a class="sourceLine" id="cb10-61" data-line-number="61">            <span class="cf">break</span>;</a>
+<a class="sourceLine" id="cb10-62" data-line-number="62">        }</a>
+<a class="sourceLine" id="cb10-63" data-line-number="63">    }</a>
+<a class="sourceLine" id="cb10-64" data-line-number="64">}</a>
+<a class="sourceLine" id="cb10-65" data-line-number="65"></a>
+<a class="sourceLine" id="cb10-66" data-line-number="66">IntegerMatrix <span class="kw">topK</span>(NumericMatrix dist, int k)</a>
+<a class="sourceLine" id="cb10-67" data-line-number="67">{</a>
+<a class="sourceLine" id="cb10-68" data-line-number="68">    auto n_samples =<span class="st"> </span><span class="kw">dist.nrow</span>();</a>
+<a class="sourceLine" id="cb10-69" data-line-number="69">    auto n_dim =<span class="st"> </span><span class="kw">dist.ncol</span>();</a>
+<a class="sourceLine" id="cb10-70" data-line-number="70">    auto temp_arr =<span class="st"> </span>new indexed_data_t<span class="op">&lt;</span>double<span class="op">&gt;</span>[n_dim];</a>
+<a class="sourceLine" id="cb10-71" data-line-number="71"></a>
+<a class="sourceLine" id="cb10-72" data-line-number="72">    IntegerMatrix <span class="kw">result</span>(n_samples, k);</a>
+<a class="sourceLine" id="cb10-73" data-line-number="73"></a>
+<a class="sourceLine" id="cb10-74" data-line-number="74">    <span class="cf">for</span> (size_t <span class="dt">i =</span> <span class="dv">0</span>; i <span class="op">&lt;</span><span class="st"> </span>n_samples; i<span class="op">++</span>)</a>
+<a class="sourceLine" id="cb10-75" data-line-number="75">    {</a>
+<a class="sourceLine" id="cb10-76" data-line-number="76">        <span class="cf">for</span> (size_t <span class="dt">j =</span> <span class="dv">0</span>; j <span class="op">&lt;</span><span class="st"> </span>n_dim; j<span class="op">++</span>)</a>
+<a class="sourceLine" id="cb10-77" data-line-number="77">        {</a>
+<a class="sourceLine" id="cb10-78" data-line-number="78">            temp_arr[j].index =<span class="st"> </span>j;</a>
+<a class="sourceLine" id="cb10-79" data-line-number="79">            temp_arr[j].data =<span class="st"> </span><span class="kw">dist</span>(i, j);</a>
+<a class="sourceLine" id="cb10-80" data-line-number="80">        }</a>
+<a class="sourceLine" id="cb10-81" data-line-number="81"></a>
+<a class="sourceLine" id="cb10-82" data-line-number="82">        <span class="cf">for</span> (int <span class="dt">j =</span> n_dim <span class="op">/</span><span class="st"> </span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span>; j <span class="op">&gt;=</span><span class="st"> </span><span class="dv">0</span>; j<span class="op">--</span>)</a>
+<a class="sourceLine" id="cb10-83" data-line-number="83">        {</a>
+<a class="sourceLine" id="cb10-84" data-line-number="84">            <span class="kw">heapify</span>(temp_arr, j, n_dim);</a>
+<a class="sourceLine" id="cb10-85" data-line-number="85">        }</a>
+<a class="sourceLine" id="cb10-86" data-line-number="86"></a>
+<a class="sourceLine" id="cb10-87" data-line-number="87">        <span class="cf">for</span> (int <span class="dt">j =</span> <span class="dv">0</span>; j <span class="op">&lt;</span><span class="st"> </span>k; j<span class="op">++</span>)</a>
+<a class="sourceLine" id="cb10-88" data-line-number="88">        {</a>
+<a class="sourceLine" id="cb10-89" data-line-number="89">            <span class="kw">result</span>(i, j) =<span class="st"> </span>temp_arr[<span class="dv">0</span>].index;</a>
+<a class="sourceLine" id="cb10-90" data-line-number="90">            std<span class="op">::</span><span class="kw">swap</span>(temp_arr[<span class="dv">0</span>], temp_arr[n_dim <span class="op">-</span><span class="st"> </span>j <span class="op">-</span><span class="st"> </span><span class="dv">1</span>]);</a>
+<a class="sourceLine" id="cb10-91" data-line-number="91">            <span class="kw">heapify</span>(temp_arr, <span class="dv">0</span>, n_dim <span class="op">-</span><span class="st"> </span>j <span class="op">-</span><span class="st"> </span><span class="dv">1</span>);</a>
+<a class="sourceLine" id="cb10-92" data-line-number="92">        }</a>
+<a class="sourceLine" id="cb10-93" data-line-number="93">    }</a>
+<a class="sourceLine" id="cb10-94" data-line-number="94"></a>
+<a class="sourceLine" id="cb10-95" data-line-number="95">    delete[] temp_arr;</a>
+<a class="sourceLine" id="cb10-96" data-line-number="96">    return result;</a>
+<a class="sourceLine" id="cb10-97" data-line-number="97">}</a>
+<a class="sourceLine" id="cb10-98" data-line-number="98"></a>
+<a class="sourceLine" id="cb10-99" data-line-number="99">IntegerVector <span class="kw">selectTopK</span>(IntegerMatrix idx_mat, IntegerVector labels, int n_classes)</a>
+<a class="sourceLine" id="cb10-100" data-line-number="100">{</a>
+<a class="sourceLine" id="cb10-101" data-line-number="101">    auto n =<span class="st"> </span><span class="kw">idx_mat.nrow</span>();</a>
+<a class="sourceLine" id="cb10-102" data-line-number="102">    auto k =<span class="st"> </span><span class="kw">idx_mat.ncol</span>();</a>
+<a class="sourceLine" id="cb10-103" data-line-number="103">    auto cnt =<span class="st"> </span>new int[n_classes];</a>
+<a class="sourceLine" id="cb10-104" data-line-number="104"></a>
+<a class="sourceLine" id="cb10-105" data-line-number="105">    IntegerVector <span class="kw">result</span>(n);</a>
+<a class="sourceLine" id="cb10-106" data-line-number="106">    <span class="cf">for</span> (int <span class="dt">i =</span> <span class="dv">0</span>; i <span class="op">&lt;</span><span class="st"> </span>n; <span class="op">++</span>i)</a>
+<a class="sourceLine" id="cb10-107" data-line-number="107">    {</a>
+<a class="sourceLine" id="cb10-108" data-line-number="108">        std<span class="op">::</span><span class="kw">memset</span>(cnt, <span class="dv">0</span>, <span class="kw">sizeof</span>(int) <span class="op">*</span><span class="st"> </span>n_classes);</a>
+<a class="sourceLine" id="cb10-109" data-line-number="109">        <span class="cf">for</span> (int <span class="dt">j =</span> <span class="dv">0</span>; j <span class="op">&lt;</span><span class="st"> </span>k; <span class="op">++</span>j)</a>
+<a class="sourceLine" id="cb10-110" data-line-number="110">            cnt[labels[<span class="kw">idx_mat</span>(i, j)]]<span class="op">++</span>;</a>
+<a class="sourceLine" id="cb10-111" data-line-number="111"></a>
+<a class="sourceLine" id="cb10-112" data-line-number="112">        int most_freq_label =<span class="st"> </span><span class="dv">-1</span>, max_freq =<span class="st"> </span><span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb10-113" data-line-number="113">        <span class="cf">for</span> (int <span class="dt">j =</span> <span class="dv">0</span>; j <span class="op">&lt;</span><span class="st"> </span>n; <span class="op">++</span>j)</a>
+<a class="sourceLine" id="cb10-114" data-line-number="114">            <span class="cf">if</span> (max_freq <span class="op">&lt;</span><span class="st"> </span>cnt[j])</a>
+<a class="sourceLine" id="cb10-115" data-line-number="115">            {</a>
+<a class="sourceLine" id="cb10-116" data-line-number="116">                max_freq =<span class="st"> </span>cnt[j];</a>
+<a class="sourceLine" id="cb10-117" data-line-number="117">                most_freq_label =<span class="st"> </span>j;</a>
+<a class="sourceLine" id="cb10-118" data-line-number="118">            }</a>
+<a class="sourceLine" id="cb10-119" data-line-number="119"></a>
+<a class="sourceLine" id="cb10-120" data-line-number="120">        <span class="kw">result</span>(i) =<span class="st"> </span>most_freq_label;</a>
+<a class="sourceLine" id="cb10-121" data-line-number="121">    }</a>
+<a class="sourceLine" id="cb10-122" data-line-number="122"></a>
+<a class="sourceLine" id="cb10-123" data-line-number="123">    delete[] cnt;</a>
+<a class="sourceLine" id="cb10-124" data-line-number="124">    return result;</a>
+<a class="sourceLine" id="cb10-125" data-line-number="125">}</a>
+<a class="sourceLine" id="cb10-126" data-line-number="126"></a>
+<a class="sourceLine" id="cb10-127" data-line-number="127">List <span class="kw">kNN</span>(NumericMatrix X, IntegerVector y, NumericMatrix Z, int n_classes, int k)</a>
+<a class="sourceLine" id="cb10-128" data-line-number="128">{</a>
+<a class="sourceLine" id="cb10-129" data-line-number="129">    auto dist =<span class="st"> </span><span class="kw">L2SqrDistance</span>(X, Z);</a>
+<a class="sourceLine" id="cb10-130" data-line-number="130">    auto topk_idx =<span class="st"> </span><span class="kw">topK</span>(dist, k);</a>
+<a class="sourceLine" id="cb10-131" data-line-number="131">    auto pred_y =<span class="st"> </span><span class="kw">selectTopK</span>(topk_idx, y, n_classes);</a>
+<a class="sourceLine" id="cb10-132" data-line-number="132">    return List<span class="op">::</span><span class="kw">create</span>(<span class="kw">Named</span>(<span class="st">&quot;dist&quot;</span>) =<span class="st"> </span>dist, <span class="kw">Named</span>(<span class="st">&quot;results&quot;</span>) =<span class="st"> </span>pred_y);</a>
+<a class="sourceLine" id="cb10-133" data-line-number="133">}</a></code></pre></div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
